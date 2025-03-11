@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales para Producción de Balanceado para Pollos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin: 0 auto; /* Centrando la tabla */
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 8px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table td {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        table a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        #searchInput {
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            max-width: 300px;
+            padding: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h2>Lista de Materiales para Producción de Balanceado para Pollos</h2>
+        
+        <!-- Campo de búsqueda -->
+        <input type="text" id="searchInput" placeholder="Buscar material...">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Unidad de Medida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maíz</td>
+                    <td>Fuente principal de energía para los pollos.</td>
+                    <th>500</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Soya</td>
+                    <td>Fuente de proteína vegetal para el crecimiento de los pollos.</td>
+                    <th>300</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Calcio</td>
+                    <td>Suplemento necesario para el desarrollo de huesos fuertes.</td>
+                    <th>50</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Vitamina A</td>
+                    <td>Suplemento vitamínico esencial para la salud de los pollos.</td>
+                    <th>5</th>
+                    <th>litros</th>
+                </tr>
+                <tr>
+                    <td>Vitaminas B</td>
+                    <td>Mejora la eficiencia en el metabolismo de los pollos.</td>
+                    <th>3</th>
+                    <th>litros</th>
+                </tr>
+                <tr>
+                    <td>Fósforo</td>
+                    <td>Mejora la digestión y el crecimiento de los pollos.</td>
+                    <th>20</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Sal</td>
+                    <td>Mejora la digestión y el equilibrio de los fluidos corporales.</td>
+                    <th>10</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Harina de pescado</td>
+                    <td>Fuente de proteína animal para los pollos.</td>
+                    <th>150</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Aminoácidos</td>
+                    <td>Mejora el proceso de crecimiento y la eficiencia en la alimentación.</td>
+                    <th>10</th>
+                    <th>kg</th>
+                </tr>
+                <tr>
+                    <td>Antioxidantes</td>
+                    <td>Preservan la calidad de la mezcla de alimentos.</td>
+                    <th>2</th>
+                    <th>kg</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Espera a que el documento esté listo para ejecutar el código
+        $(document).ready(function(){
+            // Filtro en la tabla por nombre de material
+            $('#searchInput').on('keyup', function() {
+                var value = $(this).val().toLowerCase();  // Obtener el valor ingresado y convertirlo a minúsculas
+                $('table tbody tr').filter(function() {
+                    // Si el texto de la primera columna (nombre del material) contiene el valor de búsqueda
+                    $(this).toggle($(this).find('td').eq(0).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

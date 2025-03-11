@@ -1,0 +1,129 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto; /* Habilita el scroll si es necesario */
+}
+
+/* Oculta la barra de scroll en WebKit (Chrome, Edge y Safari) */
+.form-container::-webkit-scrollbar {
+    display: none;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para los checkboxes */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+    color: #333;
+}
+
+.checkbox-group input {
+    width: 18px;
+    height: 18px;
+    accent-color: #5C6BC0; /* Color del checkbox cuando está marcado */
+}
+
+fieldset {
+    border: 2px solid #5C6BC0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    background-color: #f1f1f1;
+}
+
+legend {
+    font-weight: bold;
+    color: #5C6BC0;
+}
+
+/* Botón de envío */
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #5C6BC0;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+
+.error-msg {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none;
+}
+
+.error-msg.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+
+textarea {
+    width: 70%; /* Se ajusta al ancho del formulario */
+    max-width: 100%; /* Evita que se expanda más allá del formulario */
+    min-height: 100px; /* Ajusta la altura mínima */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+}

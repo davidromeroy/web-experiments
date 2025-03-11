@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Incluir la librería jQuery desde una CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulario de Registro</h2>
+
+        <form id="registroForm" action="procesar.php" method="POST" enctype="multipart/form-data">
+            <!-- Campos obligatorios -->
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese sus nombres" required>
+            <small id="nombreError" class="error-msg">Este campo es obligatorio.</small>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Ingrese sus apellidos" required>
+            <small id="apellidoError" class="error-msg">Este campo es obligatorio.</small>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su número de teléfono, ej: 09X XXX XXXX" required>
+            <small id="telefonoError" class="error-msg">Debe contener solo 10 números.</small>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico" required>
+            <small id="correoError" class="error-msg">Ingrese un correo válido.</small>
+
+            <!-- Preguntas optativas -->
+            <label for="discapacidad">¿Tiene alguna discapacidad?</label>
+            <select id="discapacidad" name="discapacidad">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+            </select>
+
+            <label for="vehiculo">¿Dispone de vehículo propio?</label>
+            <select id="vehiculo" name="vehiculo">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+            </select>
+
+            <div id="tipoVehiculoDiv" class="hidden">
+                <label for="tipoVehiculo">Tipo de vehículo:</label>
+                <input type="text" id="tipoVehiculo" name="tipoVehiculo" placeholder="Ingrese su tipo de vehículo, ej: Chevrolet">
+            </div>
+
+            <!-- Carga de archivo -->
+            <label for="foto">Foto de perfil:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" required>
+
+            <!-- Preferencias -->
+            <label>Preferencias:</label>
+
+            <fieldset>
+                <legend>¿Dónde prefiere ir de vacaciones?</legend>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="entorno" value="Playa"> Playa</label>
+                    <label><input type="radio" name="entorno" value="Montaña"> Montaña</label>
+                </div>
+                <small id="entornoError" class="error-msg">Debe seleccionar una opción.</small>
+            </fieldset>
+
+            <fieldset>
+                <legend>Tipos de música que le gustan:</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="musica[]" value="Rock"> Rock</label>
+                    <label><input type="checkbox" name="musica[]" value="Pop"> Pop</label>
+                    <label><input type="checkbox" name="musica[]" value="Jazz"> Jazz</label>
+                    <label><input type="checkbox" name="musica[]" value="Electrónica"> Electrónica</label>
+                    <label><input type="checkbox" name="musica[]" value="Otros"> Otros</label>
+                </div>
+                <small id="musicaError" class="error-msg">Debe seleccionar al menos una opción.</small>
+            </fieldset>
+
+            <fieldset>
+                <legend>Actividades de ocio:</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="ocio[]" value="Leer"> Leer</label>
+                    <label><input type="checkbox" name="ocio[]" value="Ver películas"> Ver películas</label>
+                    <label><input type="checkbox" name="ocio[]" value="Hacer deporte"> Hacer deporte</label>
+                    <label><input type="checkbox" name="ocio[]" value="Viajar"> Viajar</label>
+                    <label><input type="checkbox" name="ocio[]" value="Otros"> Otros</label>
+                </div>
+                <small id="ocioError" class="error-msg">Debe seleccionar al menos una opción.</small>
+            </fieldset>
+
+            <!-- Comentarios -->
+            <label for="comentarios">Comentarios:</label>
+            <textarea id="comentarios" name="comentarios" placeholder="Ingrese aquí sus comentarios o dudas"></textarea>
+
+            <!-- Botón de enviar -->
+            <button type="submit" class="submit-btn">Enviar Formulario</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>

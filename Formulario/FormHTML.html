@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto; /* Habilita el scroll si es necesario */
+        }
+
+        /* Oculta la barra de scroll en WebKit (Chrome, Edge y Safari) */
+        .form-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para los checkboxes */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: #007BFF; /* Color del checkbox cuando está marcado */
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        /* Botón de envío */
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 70%; /* Se ajusta al ancho del formulario */
+            max-width: 100%; /* Evita que se expanda más allá del formulario */
+            min-height: 100px; /* Ajusta la altura mínima */
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulario de Registro</h2>
+
+        <form id="registroForm" action="procesar.php" method="POST" enctype="multipart/form-data">
+            <!-- Campos obligatorios -->
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese sus nombres" required>
+            <small id="nombreError" class="error-msg">Este campo es obligatorio.</small>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Ingrese sus apellidos" required>
+            <small id="apellidoError" class="error-msg">Este campo es obligatorio.</small>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" placeholder="Ingrese su número de teléfono" required>
+            <small id="telefonoError" class="error-msg">Debe contener solo 10 números.</small>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico" required>
+            <small id="correoError" class="error-msg">Ingrese un correo válido.</small>
+
+            <!-- Preguntas optativas -->
+            <label for="discapacidad">¿Tiene alguna discapacidad?</label>
+            <select id="discapacidad" name="discapacidad">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+            </select>
+
+            <label for="vehiculo">¿Dispone de vehículo propio?</label>
+            <select id="vehiculo" name="vehiculo" onchange="mostrarCampoVehiculo()">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+            </select>
+
+            <div id="tipoVehiculoDiv" class="hidden">
+                <label for="tipoVehiculo">Tipo de vehículo:</label>
+                <input type="text" id="tipoVehiculo" name="tipoVehiculo" placeholder="Ingrese su tipo de vehículo">
+            </div>
+
+            <!-- Carga de archivo -->
+            <label for="foto">Foto de perfil:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" required>
+
+            <!-- Preferencias -->
+            <label>Preferencias:</label>
+
+            <fieldset>
+                <legend>¿Prefiere playa o montaña?</legend>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="entorno" value="Playa"> Playa</label>
+                    <label><input type="radio" name="entorno" value="Montaña"> Montaña</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Tipos de música que le gustan:</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="musica[]" value="Rock"> Rock</label>
+                    <label><input type="checkbox" name="musica[]" value="Pop"> Pop</label>
+                    <label><input type="checkbox" name="musica[]" value="Jazz"> Jazz</label>
+                    <label><input type="checkbox" name="musica[]" value="Electrónica"> Electrónica</label>
+                    <label><input type="checkbox" name="musica[]" value="Otros"> Otros</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Actividades de ocio:</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="ocio[]" value="Leer"> Leer</label>
+                    <label><input type="checkbox" name="ocio[]" value="Ver películas"> Ver películas</label>
+                    <label><input type="checkbox" name="ocio[]" value="Hacer deporte"> Hacer deporte</label>
+                    <label><input type="checkbox" name="ocio[]" value="Viajar"> Viajar</label>
+                    <label><input type="checkbox" name="ocio[]" value="Otros"> Otros</label>
+                </div>
+            </fieldset>
+
+            <!-- Comentarios -->
+            <label for="comentarios">Comentarios:</label>
+            <textarea id="comentarios" name="comentarios" placeholder="Ingrese aquí sus comentarios o dudas"></textarea>
+
+            <!-- Botón de enviar -->
+            <button type="submit" class="submit-btn">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        function mostrarCampoVehiculo() {
+            var vehiculo = document.getElementById("vehiculo").value;
+            var tipoVehiculoDiv = document.getElementById("tipoVehiculoDiv");
+            tipoVehiculoDiv.style.display = (vehiculo === "Sí") ? "block" : "none";
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const formFields = ["nombre", "apellido", "telefono", "correo"];
+            
+            formFields.forEach(field => {
+                document.getElementById(field).addEventListener("input", function () {
+                    validarCampo(field);
+                });
+            });
+    
+            function validarCampo(id) {
+                let input = document.getElementById(id);
+                let errorMsg = document.getElementById(id + "Error");
+    
+                if (input.value.trim() === "") {
+                    errorMsg.style.display = "block";
+                } else {
+                    errorMsg.style.display = "none";
+                }
+            }
+    
+            // Validación especial para el teléfono
+            document.getElementById("telefono").addEventListener("input", function () {
+                let telefonoInput = this.value;
+                let telefonoError = document.getElementById("telefonoError");
+    
+                this.value = telefonoInput.replace(/\D/g, "");
+    
+                if (this.value.length !== 10) {
+                    telefonoError.style.display = "block";
+                } else {
+                    telefonoError.style.display = "none";
+                }
+            });
+        });
+    </script>    
+    
+</body>
+</html>
