@@ -1,24 +1,25 @@
 /* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");            
 }
 
 /* Contenedor del formulario */
 .form-container {
     background: #fff;
-    padding: 25px;
+    padding: 0px 25px 25px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 70%;
     max-width: 500px;
     max-height: 90vh;
     overflow-y: auto; /* Habilita el scroll si es necesario */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento */
 }
 
 /* Oculta la barra de scroll en WebKit (Chrome, Edge y Safari) */
@@ -29,6 +30,8 @@ body {
 h2 {
     text-align: center;
     color: #333;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
 }
 
 label {
@@ -120,7 +123,8 @@ legend {
 
 textarea {
     width: 80%; /* Se ajusta al ancho del formulario */
-    max-width: 100%; /* Evita que se expanda más allá del formulario */
+    max-width: 90%; /* Evita que se expanda más allá del formulario */
+    min-width: 20%; /* Ajusta el ancho mínimo */
     min-height: 100px; /* Ajusta la altura mínima */
     padding: 8px;
     border-radius: 5px;
@@ -180,8 +184,10 @@ form {
 /* En modo vertical */
 @media (orientation: portrait) {
     body {
-      background-color: #0056b3;
+        background-color: #1c00f0;
     }
+
+    
   }
   
   /* En modo horizontal */

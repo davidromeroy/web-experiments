@@ -4,32 +4,41 @@ $(document).ready(function () {
 
     // Mostrar/ocultar el campo de tipo de vehículo según la selección de "vehiculo"
     $("#vehiculo").change(function() {
-        if ($(this).val() === "Sí") {
-            $("#tipoVehiculoDiv").show();
-        } else {
-            $("#tipoVehiculoDiv").hide();
-            $("#tipoVehiculo").val(""); // Limpiar el campo cuando se oculta
-        }
+        const isSelected = $(this).val() === "Sí";
+        $("#tipoVehiculoDiv").toggle(isSelected);
+        $("#tipoVehiculo").val(""); // Limpiar el campo cuando se oculta
+        isSelected ? formFields.push("tipoVehiculo") : formFields.splice(formFields.indexOf("tipoVehiculo"), 1);         // Agregar o eliminar "tipoVehiculo" de los campos a validar
     });
 
     // Validaciones en tiempo real
     formFields.forEach(field => {
-        $("#" + field).on("input", function () {
+        $("#" + field).on("blur", function () {
             validarCampo(field);
         });
     });
 
+    // Evento para mostrar el mensaje de error al salir del campo
+    $("#telefono").on("input", function () {
+        let valor = $(this).val().trim();
+
+        let telefono = valor.replace(/\D/g, "");  // Eliminar caracteres no numéricos
+        $(this).val(telefono);  // Actualizar el campo con solo números
+
+        if (telefono.length > 10) {
+            telefono = telefono.substring(0, 10); // Limitar a 10 caracteres
+            $(this).val(telefono);  
+        }
+    });
+    
     function validarCampo(id) {
         let $input = $("#" + id);
         let $errorMsg = $("#" + id + "Error");
         let valor = $input.val().trim();
         let valido = true;  // Bandera para saber si el campo es válido
 
-        // Validación para nombre y apellido (solo letras y espacios)
-        if (id === "nombre" || id === "apellido") {
-            $("#nombre, #apellido").on("input", function () {
-                $(this).val($(this).val().replace(/[^A-Za-záéíóúÁÉÍÓÚñÑ\s]/g, ""));
-            });            
+        // Validación para nombre, apellido y tipoVehiculo(solo letras y espacios)
+        if (["nombre", "apellido", "tipoVehiculo"].includes(id)) {
+            $input.val(valor.replace(/[^A-Za-záéíóúÁÉÍÓÚñÑ\s]/g, ""));  // Eliminar caracteres no alfabéticos      
             // let regexTexto = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
             // if (!regexTexto.test(valor)) {
             //     $errorMsg.show().text("Este campo solo puede contener letras y espacios.");
@@ -38,6 +47,7 @@ $(document).ready(function () {
         }
 
         // Validación para correo electrónico
+        // if (id === "correo" && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(valor)) {
         if (id === "correo") {
             let regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (!regexCorreo.test(valor)) {
@@ -48,19 +58,17 @@ $(document).ready(function () {
 
         // Validación para teléfono (solo números y máximo 10 dígitos)
         if (id === "telefono") {
-            let telefono = valor.replace(/\D/g, "");  // Eliminar caracteres no numéricos
-            $input.val(telefono);  // Actualizar el campo con solo números
-
-            if (telefono.length > 10) {
-                telefono = telefono.substring(0, 10); // Limitar a 10 caracteres
-                $input.val(telefono);  
-            }
-
             if (telefono.length !== 10 && telefono.length > 0) {
                 $errorMsg.show().text("El teléfono debe contener exactamente 10 dígitos.");
                 valido = false;
             }
 
+        }
+
+        // Si el campo tipoVehiculo es obligatorio y está vacío
+        if (id === "tipoVehiculo" && $("#vehiculo").val() === "Sí" && valor === "") {
+            $errorMsg.show().text("Este campo es obligatorio.");
+            valido = false;
         }
 
         // Si el campo está vacío
@@ -121,7 +129,6 @@ $(document).ready(function () {
 
 
 
-// hacer que el campo tipoVehiculo sera requerido si se seleciona que SI se tiene auto propio
-// La validación del correo que tire el mensaje de error cuando se de al button y esté mal escrito, o si se deja de escribir y está mal el formato
+// FIXME:La validación del correo que tire el mensaje de error cuando se de al button y esté mal escrito, o si se deja de escribir y está mal el formato
 // lo del telefono que me mande el mensaje de error de q son 10 digitos cuando se da al button, maybe cuando se deja de escribir y no está completo
 //meterle mas cosas para volverlo mas responsivo y animaciones para que sea dinamico
