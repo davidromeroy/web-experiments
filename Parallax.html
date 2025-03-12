@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo Parallax</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .parallax {
+      background-image: url('https://serendippias.com/wp-content/uploads/2022/07/bosque-scaled.jpg');
+      height: 100vh;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .contenido {
+      padding: 50px;
+      text-align: center;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="parallax"></div>
+
+  <div class="contenido">
+    <h2>Bienvenido</h2>
+    <p>Este es un ejemplo de Parallax en CSS.</p>
+  </div>
+
+</body>
+</html>

@@ -27,14 +27,14 @@ $(document).ready(function () {
 
         // Validación para nombre y apellido (solo letras y espacios)
         if (id === "nombre" || id === "apellido") {
-            // $("#nombre, #apellido").on("input", function () {
-            //     $(this).val($(this).val().replace(/[^A-Za-záéíóúÁÉÍÓÚñÑ\s]/g, ""));
-            // });            
-            let regexTexto = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
-            if (!regexTexto.test(valor)) {
-                $errorMsg.show().text("Este campo solo puede contener letras y espacios.");
-                valido = false;
-            }
+            $("#nombre, #apellido").on("input", function () {
+                $(this).val($(this).val().replace(/[^A-Za-záéíóúÁÉÍÓÚñÑ\s]/g, ""));
+            });            
+            // let regexTexto = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+            // if (!regexTexto.test(valor)) {
+            //     $errorMsg.show().text("Este campo solo puede contener letras y espacios.");
+            //     valido = false;
+            // }
         }
 
         // Validación para correo electrónico
@@ -54,6 +54,11 @@ $(document).ready(function () {
             if (telefono.length > 10) {
                 telefono = telefono.substring(0, 10); // Limitar a 10 caracteres
                 $input.val(telefono);  
+            }
+
+            if (telefono.length !== 10 && telefono.length > 0) {
+                $errorMsg.show().text("El teléfono debe contener exactamente 10 dígitos.");
+                valido = false;
             }
 
         }
@@ -87,12 +92,6 @@ $(document).ready(function () {
             }
         });
 
-        // Validación de telefono
-        if (telefono.length !== 10 && telefono.length !== 0) {
-            $errorMsg.show().text("El teléfono debe contener exactamente 10 dígitos.");
-            valido = false;
-        }
-
         // Validación de preferencias entornos
         const entorno = $('input[name="entorno"]:checked');
         if (entorno.length === 0) {
@@ -119,3 +118,10 @@ $(document).ready(function () {
         }
     });
 });
+
+
+
+// hacer que el campo tipoVehiculo sera requerido si se seleciona que SI se tiene auto propio
+// La validación del correo que tire el mensaje de error cuando se de al button y esté mal escrito, o si se deja de escribir y está mal el formato
+// lo del telefono que me mande el mensaje de error de q son 10 digitos cuando se da al button, maybe cuando se deja de escribir y no está completo
+//meterle mas cosas para volverlo mas responsivo y animaciones para que sea dinamico
